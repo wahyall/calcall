@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="css/all.css">
+   <link rel="stylesheet" href="css/fm.selectator.jquery.css">
+   <title>Document</title>
+</head>
+
+<body>
+   <div class="container">
+      <!-- Menu Toggle -->
+      <div class="menu-toggle">
+         <span></span>
+         <span></span>
+         <span></span>
+      </div>
+
+      <!-- Menu Wrapper -->
+      <div class="menu-wrapper">
+         <a href="#" class="kalculator">
+            <img src="">
+            <span>Kalculator</span>
+         </a>
+         <a href="#" class="currency">
+            <img src="">
+            <span>Konversi Mata Uang</span>
+         </a>
+         <a href="#" class="suhu">
+            <img src="">
+            <span>Konversi Suhu</span>
+         </a>
+         <a href="#" class="bilangan">
+            <img src="">
+            <span>Konversi Sistem Bilangan</span>
+         </a>
+      </div>
+
+      <!-- Theme Toggle -->
+      <div class="theme-toggle">
+         <span></span>
+      </div>
+
+      <div class="kurs-wrapper">
+
+         <!-- Form Input 1 -->
+         <div class="form-1">
+            <select name="option-1" id="option-1" onchange="funOptionSatu()"></select>
+            <div class="values" style="border-bottom: 1px solid var(--borderOn);">
+               <span class="code">USD</span>
+               <input type="text" class="value-1" value="1" disabled oninput="funValueSatu()" focus="focus">
+            </div>
+         </div>
+
+         <!-- Form Input 2 -->
+         <div class="form-2">
+            <select name="option-2" id="option-2" onchange="funOptionDua()"></select>
+            <div class="values">
+               <span class="code">IDR</span>
+               <input type="text" class="value-2" value="14000" disabled oninput="funValueDua()">
+            </div>
+         </div>
+      </div>
+      <div class="info-data">
+         <span>Data perhitungan sudah dibulatkan ke satuan terdekat</span>
+         <span>Update terakhir pada 2020-11-19 19:00:00</span>
+      </div>
+      <div class="button-number">
+         <span value="1">1</span>
+         <span value="2">2</span>
+         <span value="3">3</span>
+         <span value="c">C</span>
+         <span value="4">4</span>
+         <span value="5">5</span>
+         <span value="6">6</span>
+         <span value="del">
+            <i class="fas fa-backspace"></i>
+         </span>
+         <span value="7">7</span>
+         <span value="8">8</span>
+         <span value="9">9</span>
+         <span value="0">0</span>
+         <span value="." style="font-size: 2.5em;">.</span>
+      </div>
+   </div>
+</body>
+<script src="menu.js"></script>
+<script src="js/jquery-3.5.1.min.js"></script>
+<script src="js/fm.selectator.jquery.js"></script>
+<script src="kurs_valas.js"></script>
+<script src="script.js"></script>
+<script>
+   // Theme Setting
+   const root = document.documentElement;
+   const themeToggle = document.querySelector('.theme-toggle');
+   themeToggle.addEventListener('click', function () {
+      themeToggle.firstElementChild.classList.toggle('light');
+      if (themeToggle.firstElementChild.classList.contains('light') == true) {
+         // Light Theme
+         root.style.setProperty('--bgOne', '#f1f1f1');
+         root.style.setProperty('--bgTwo', '#e9e9e9');
+         root.style.setProperty('--bgThree', '#e1e1e1');
+         root.style.setProperty('--textColor', '#1d1d1d');
+         root.style.setProperty('--borderOn', '#cccccc');
+         root.style.setProperty('--borderOff', '#e7e7e7');
+         root.style.setProperty('--buttonClick', '#d4d4d4')
+      } else {
+         // Dark Theme
+         root.style.setProperty('--bgOne', '#0e0e0e');
+         root.style.setProperty('--bgTwo', '#1f1f1f');
+         root.style.setProperty('--bgThree', '#1d1d1d');
+         root.style.setProperty('--textColor', '#eaeaea');
+         root.style.setProperty('--borderOn', '#777777');
+         root.style.setProperty('--borderOff', '#181818');
+         root.style.setProperty('--buttonClick', '#292929')
+      }
+   });
+
+
+   // Debugging
+   const selectOptions = document.querySelectorAll('.selectator_option');
+   const selectInput = document.querySelectorAll('.selectator_input');
+   selectOptions.forEach(function (option) {
+      option.addEventListener('click', function () {
+         selectInput[0].blur();
+         selectInput[1].blur();
+      });
+   });
+</script>
+
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="This is Powerful Math and Counting Tools">
+   <meta name="keywords"
+      content="calculator, powerful, math, counting, tools, useful, counting tools, decimal, octal, binary, hexadecimal, converter">
+   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="css/all.css">
+   <link rel="stylesheet" href="css/fm.selectator.jquery.css">
+   <title>Calc All - Powerful Math and Counting Tools</title>
+</head>
+
+<body>
+   <h1 style="display: none;">Calc All - Powerful Math and Counting Tools</h1>
+
+   <div class="container">
+      <!-- Menu Toggle -->
+      <div class="menu-toggle">
+         <span></span>
+         <span></span>
+         <span></span>
+      </div>
+
+      <!-- Menu Wrapper -->
+      <div class="menu-wrapper">
+         <div class="kalkulator">
+            <img src="img/calculator.png">
+            <span>Kalkulator</span>
+         </div>
+         <div class="currency">
+            <img src="img/exchange.png">
+            <span>Konversi Mata Uang</span>
+         </div>
+         <div class="temperature">
+            <img src="img/thermometer.png">
+            <span>Konversi Suhu</span>
+         </div>
+         <div class="number">
+            <img src="img/binary-code.png">
+            <span>Konversi Sistem Bilangan</span>
+         </div>
+      </div>
+
+      <!-- Theme Toggle -->
+      <div class="theme-toggle">
+         <span></span>
+      </div>
+
+      <div class="value-result">
+         <div class="proccess"></div>
+         <input type="text" class="values" disabled>
+      </div>
+      <div class="button-number calc">
+         <span value="c">AC</span>
+         <span value="del" style="font-size: 1.5em;">
+            <i class="fas fa-backspace"></i>
+         </span>
+         <span value="+" style="color: rgb(223, 87, 38); font-size: 3em;">+</span>
+         <span value="1">1</span>
+         <span value="2">2</span>
+         <span value="3">3</span>
+         <span value="-" style="color: rgb(223, 87, 38); font-size: 3.5em;">-</span>
+         <span value="4">4</span>
+         <span value="5">5</span>
+         <span value="6">6</span>
+         <span value="*" style="color: rgb(223, 87, 38); font-size: 2.5em;">×</span>
+         <span value="7">7</span>
+         <span value="8">8</span>
+         <span value="9">9</span>
+         <span value="/" style="color: rgb(223, 87, 38); font-size: 2.5em;">÷</span>
+         <span value="." style="font-size: 2em;">.</span>
+         <span value="0">0</span>
+         <span value="=" style="font-size: 3em;">=</span>
+      </div>
+
+
+      <!-- Kurs Value Wrapper -->
+      <div class="kurs-value">
+         <div class="kurs-wrapper">
+            <!-- Form Input 1 -->
+            <div class="form-1">
+               <select name="currency-1" id="currency-1" onchange="funCurrencySatu()"></select>
+               <div class="values" style="border-bottom: 1px solid var(--borderOn);">
+                  <span class="code">USD</span>
+                  <input type="text" class="valas-1" value="1" disabled oninput="funValueSatu()" focus="focus">
+               </div>
+            </div>
+
+            <!-- Form Input 2 -->
+            <div class="form-2">
+               <select name="currency-2" id="currency-2" onchange="funCurrencyDua()"></select>
+               <div class="values">
+                  <span class="code">IDR</span>
+                  <input type="text" class="valas-2" value="14000" disabled oninput="funValueDua()">
+               </div>
+            </div>
+         </div>
+         <div class="info-data" style="visibility: hidden;">
+            <span>Data perhitungan sudah dibulatkan ke satuan terdekat</span>
+            <span>Update terakhir pada 2020-11-19 19:00:00</span>
+         </div>
+         <div class="button-currency">
+            <span value="1">1</span>
+            <span value="2">2</span>
+            <span value="3">3</span>
+            <span value="c">AC</span>
+            <span value="4">4</span>
+            <span value="5">5</span>
+            <span value="6">6</span>
+            <span value="del">
+               <i class="fas fa-backspace"></i>
+            </span>
+            <span value="7">7</span>
+            <span value="8">8</span>
+            <span value="9">9</span>
+            <span value="0">0</span>
+            <span value="." style="font-size: 2.5em;">.</span>
+         </div>
+      </div>
+
+      <!-- Suhu Wrapper -->
+      <div class="suhu">
+         <div class="suhu-wrapper">
+            <!-- Form Input 1 -->
+            <div class="form-1">
+               <select name="temperature-1" id="temperature-1" onchange="funTemperatureSatu()"></select>
+               <div class="values" style="border-bottom: 1px solid var(--borderOn);">
+                  <span class="code">°C</span>
+                  <input type="text" class="suhu-1" value="35" disabled oninput="funValueSuhuSatu()" focus="focus">
+               </div>
+            </div>
+
+            <!-- Form Input 2 -->
+            <div class="form-2">
+               <select name="temperature-2" id="temperature-2" onchange="funTemperatureDua()"></select>
+               <div class="values">
+                  <span class="code">°R</span>
+                  <input type="text" class="suhu-2" value="28" disabled oninput="funValueSuhuDua()">
+               </div>
+            </div>
+         </div>
+         <div class="info-data" style="visibility: hidden;">
+            <span>Data perhitungan sudah dibulatkan ke satuan terdekat</span>
+            <span>Update terakhir pada 2020-11-19 19:00:00</span>
+         </div>
+         <div class="button-suhu">
+            <span value="1">1</span>
+            <span value="2">2</span>
+            <span value="3">3</span>
+            <span value="pm">
+               <img src="plus_minus.png" style="width: 40%; filter: invert(1);">
+            </span>
+            <span value="c">AC</span>
+            <span value="4">4</span>
+            <span value="5">5</span>
+            <span value="6">6</span>
+            <span value="del">
+               <i class="fas fa-backspace"></i>
+            </span>
+            <span value="7">7</span>
+            <span value="8">8</span>
+            <span value="9">9</span>
+            <span value="0">0</span>
+            <span value="." style="font-size: 2.5em;">.</span>
+         </div>
+      </div>
+
+      <!-- Sistem Bilangan Wrapper -->
+      <div class="bilangan">
+         <div class="bilangan-wrapper">
+            <!-- Form Input 1 -->
+            <div class="form-1">
+               <select name="number-1" id="number-1" onchange="funNumberSatu()"></select>
+               <div class="values" style="border-bottom: 1px solid var(--borderOn);">
+                  <span class="code">DEC</span>
+                  <input type="text" class="bilangan-1" value="10" disabled oninput="funValueBilanganSatu()"
+                     focus="focus">
+               </div>
+            </div>
+
+            <!-- Form Input 2 -->
+            <div class="form-2">
+               <select name="number-2" id="number-2" onchange="funNumberDua()"></select>
+               <div class="values">
+                  <span class="code">BIN</span>
+                  <input type="text" class="bilangan-2" value="1010" disabled oninput="funValueBilanganDua()">
+               </div>
+            </div>
+         </div>
+         <div class="info-data" style="visibility: hidden;"></div>
+         <div class="button-bilangan">
+            <span value="1">1</span>
+            <span value="2">2</span>
+            <span value="3">3</span>
+            <span value="c">AC</span>
+            <span value="4">4</span>
+            <span value="5">5</span>
+            <span value="6">6</span>
+            <span value="del">
+               <i class="fas fa-backspace"></i>
+            </span>
+            <span value="7">7</span>
+            <span value="8">8</span>
+            <span value="9">9</span>
+            <span value="0">0</span>
+         </div>
+      </div>
+
+      <!-- Hexadecimal Button -->
+      <div class="hex-button">
+         <span value="1">1</span>
+         <span value="2">2</span>
+         <span value="3">3</span>
+         <span value="cl">AC</span>
+         <span value="4">4</span>
+         <span value="5">5</span>
+         <span value="6">6</span>
+         <span value="del">
+            <i class="fas fa-backspace"></i>
+         </span>
+         <span value="7">7</span>
+         <span value="8">8</span>
+         <span value="9">9</span>
+         <span value="A">A</span>
+         <span value="B">B</span>
+         <span value="C">C</span>
+         <span value="D">D</span>
+         <span value="E">E</span>
+         <span value="F">F</span>
+         <span value="0">0</span>
+      </div>
+
+      <!-- Binary Button -->
+      <div class="bin-button">
+         <span value="0">0</span>
+         <span value="1">1</span>
+         <span value="cl">AC</span>
+         <span value="del">
+            <i class="fas fa-backspace"></i>
+         </span>
+      </div>
+
+      <!-- Octal Button -->
+      <div class="oct-button">
+         <span value="1">1</span>
+         <span value="2">2</span>
+         <span value="3">3</span>
+         <span value="4">4</span>
+         <span value="5">5</span>
+         <span value="6">6</span>
+         <span value="7">7</span>
+         <span value="0">0</span>
+         <span value="del">
+            <i class="fas fa-backspace"></i>
+         </span>
+         <span value="cl">AC</span>
+      </div>
+   </div>
+</body>
+<!-- Selectator -->
+<script src="js/jquery-3.5.1.min.js"></script>
+<script src="js/fm.selectator.jquery.js"></script>
+
+<!-- Kurs Value -->
+<script src="kurs_value/kurs_valas.js"></script>
+<script src="kurs_value/script.js"></script>
+
+<!-- Suhu -->
+<script src="suhu/suhu.js"></script>
+<script src="suhu/script.js"></script>
+
+<!-- Bilangan -->
+<script src="number/number.js"></script>
+<script src="number/script.js"></script>
+
+<!-- Main -->
+<script src="menu.js"></script>
+<script src="main.js"></script>
+<script>
+   // Theme Setting
+   const root = document.documentElement;
+   const themeToggle = document.querySelector('.theme-toggle');
+   themeToggle.addEventListener('click', function () {
+      themeToggle.firstElementChild.classList.toggle('light');
+      if (themeToggle.firstElementChild.classList.contains('light') == true) {
+         // Light Theme
+         root.style.setProperty('--bgOne', '#f1f1f1');
+         root.style.setProperty('--bgTwo', '#e9e9e9');
+         root.style.setProperty('--bgThree', '#e1e1e1');
+         root.style.setProperty('--textColor', '#1d1d1d');
+         root.style.setProperty('--borderOn', '#cccccc');
+         root.style.setProperty('--borderOff', '#e7e7e7');
+         root.style.setProperty('--buttonClick', '#d4d4d4')
+         document.querySelector('span[value="pm"] img').style.filter = 'invert(0)'
+      } else {
+         // Dark Theme
+         root.style.setProperty('--bgOne', '#0e0e0e');
+         root.style.setProperty('--bgTwo', '#161616');
+         root.style.setProperty('--bgThree', '#1d1d1d');
+         root.style.setProperty('--textColor', '#eaeaea');
+         root.style.setProperty('--borderOn', '#777777');
+         root.style.setProperty('--borderOff', '#181818');
+         root.style.setProperty('--buttonClick', '#292929')
+         document.querySelector('span[value="pm"] img').style.filter = 'invert(1)'
+      }
+   });
+
+   // Debugging
+   const selectatorOptions = document.querySelectorAll('.selectator_option');
+   const selectatorInputs = document.querySelectorAll('.selectator_input');
+   selectatorOptions.forEach(function (option) {
+      option.addEventListener('click', function () {
+         for (let i = 0; i < selectatorInputs.length; i++) {
+            selectatorInputs[i].blur();
+         }
+      })
+   });
+
+   const BilanganSelectatorOptions = document.querySelectorAll('.bilangan .selectator_option');
+   BilanganSelectatorOptions.forEach(function (option) {
+      option.addEventListener('click', function () {
+         bilanganSatu.value = '0';
+         bilanganDua.value = '0';
+      })
+   })
+
+   focusOnSatu();
+   document.querySelector('.bin-button').classList.remove('open');
+
+   document.querySelectorAll('.selectator_options').forEach(function (item) {
+      item.style.border = '1px solid var(--borderOn)';
+   });
+
+   document.querySelectorAll('.selectator_input').forEach(function (item) {
+      item.style.border = '1px solid var(--borderOn)';
+   })
+</script>
+
+</html>

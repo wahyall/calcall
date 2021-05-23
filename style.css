@@ -1,0 +1,746 @@
+:root {
+   --bgOne: #0e0e0e;
+   --bgTwo: #161616;
+   --bgThree: #1d1d1d;
+   --textColor: #f1f1f1;
+   --borderOn: #777;
+   --borderOff: #181818;
+   --buttonClick: #292929;
+   --result: #777;
+}
+
+* {
+   margin: 0;
+   padding: 0;
+   list-style: none;
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+   appearance: none;
+}
+
+::-webkit-scrollbar {
+   background-color: var(--bgThree) !important;
+}
+
+::-webkit-scrollbar-thumb {
+   background: var(--textColor) !important;
+   border-radius: 10px;
+}
+
+
+body {
+   height: 100vh;
+   display: grid;
+   place-items: center;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   background-color: rgb(255, 255, 203);
+   color: var(--textColor);
+   overflow: hidden;
+}
+
+.container {
+   border: 2px solid black;
+   background-color: var(--bgOne);
+   border-radius: 10px;
+   display: grid;
+   grid-template-rows: 160px 460px;
+   align-content: flex-end;
+   height: 640px;
+   grid-template-columns: 100%;
+   justify-content: center;
+   width: 400px;
+   position: relative;
+   overflow: hidden;
+}
+
+
+/* Theme Toggle */
+.theme-toggle {
+   position: absolute;
+   top: 5px;
+   right: 5px;
+   width: 40px;
+   height: 20px;
+   border: 2px solid var(--bgThree);
+   background-color: var(--bgThree);
+   border-radius: 20px;
+   cursor: pointer;
+}
+
+.theme-toggle span {
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+   background-color: #df5726;
+   position: absolute;
+}
+
+span.light {
+   right: 0;
+}
+
+/* Menu Toggle */
+.menu-toggle {
+   position: absolute;
+   top: 5px;
+   left: 5px;
+   width: 30px;
+   height: 30px;
+   display: grid;
+   align-items: center;
+   cursor: pointer;
+}
+
+.menu-toggle span {
+   width: 100%;
+   height: 4px;
+   background-color: rgb(223, 87, 38);
+   border-radius: 5px;
+}
+
+
+/* Menu Wrapper */
+.menu-wrapper {
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+   height: calc(100% - 40px);
+   background-color: var(--bgOne);
+   z-index: 999;
+   display: grid;
+   grid-template-rows: repeat(4, 60px);
+   align-items: center;
+   gap: 10px;
+   transform: translateX(-100%);
+   transition: .4s;
+}
+
+.menu-wrapper.open {
+   transform: translateX(0);
+}
+
+.menu-wrapper div {
+   display: block;
+   background-color: var(--bgOne);
+   height: 100%;
+   display: grid;
+   grid-template-columns: 60px calc(100% - 60px);
+   place-items: center;
+   gap: 10px;
+   border-bottom: 1px solid var(--borderOff);
+   cursor: pointer;
+   color: var(--textColor);
+}
+
+.menu-wrapper div span {
+   font-size: 1.4em;
+   display: flex;
+   align-items: center;
+   justify-self: start;
+}
+
+.menu-wrapper div img {
+   width: 60%;
+}
+
+
+/* Value Result */
+.value-result {
+   display: grid;
+   grid-template-rows: 60px 80px;
+   grid-template-columns: 100%;
+   justify-items: flex-end;
+   align-content: end;
+}
+
+.value-result .values {
+   background-color: transparent;
+   border: none;
+   color: var(--textColor);
+   font-size: 2.5em;
+   font-weight: 600;
+   text-align: right;
+   width: 100%;
+   height: 80px;
+   overflow: hidden;
+   display: grid;
+   place-items: end end;
+}
+
+.value-result .values:focus {
+   border: none;
+   outline: none;
+}
+
+.value-result .proccess {
+   color: var(--result);
+   font-size: 1.5em;
+   font-weight: 600;
+   display: flex;
+   justify-content: flex-end;
+   align-items: flex-end;
+}
+
+
+/* Button Number */
+.button-number.calc {
+   display: grid;
+   grid-template-rows: repeat(5, 70px);
+   grid-template-columns: repeat(4, 70px);
+   justify-content: center;
+   gap: 20px;
+   background-color: var(--bgTwo);
+   height: 100%;
+   align-content: center;
+}
+
+.button-number.calc span {
+   width: 100%;
+   height: 100%;
+   display: grid;
+   place-items: center;
+   border-radius: 35px;
+   background-color: var(--bgThree);
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   font-weight: 600;
+   font-size: 1.5em;
+   cursor: pointer;
+}
+
+.button-number.calc span:active {
+   background-color: var(--buttonClick);
+}
+
+.button-number.calc span[value="c"] {
+   grid-area: 1 / 1 / 2 / 3;
+   font-size: 2em;
+}
+
+.button-number.calc span[value="="] {
+   grid-area: 5 / 3 / 6 / 5;
+   background-color: rgb(223, 87, 38);
+}
+
+
+/* Kurs Value */
+.kurs-value,
+.suhu,
+.bilangan {
+   background-color: var(--bgOne);
+   display: grid;
+   grid-template-rows: 160px 20px 380px;
+   align-content: flex-end;
+   height: calc(100% - 40px);
+   grid-template-columns: 100%;
+   justify-content: center;
+   align-content: space-between;
+   width: 100%;
+   gap: 20px;
+   position: absolute;
+   left: 100%;
+   bottom: 0;
+}
+
+.kurs-value.open,
+.suhu.open,
+.bilangan.open {
+   left: 0;
+}
+
+.kurs-wrapper,
+.suhu-wrapper,
+.bilangan-wrapper {
+   display: grid;
+   grid-template-rows: 1fr 1fr;
+   grid-template-columns: 100%;
+   margin-top: 20px;
+}
+
+.form-1,
+.form-2 {
+   position: relative;
+}
+
+#currency-1,
+#currency-2,
+#suhu-1,
+#suhu-2,
+#bilangan-1,
+#bilangan-2 {
+   background-color: var(--bgOne);
+   color: var(--textColor);
+}
+
+.kurs-value .values,
+.suhu .values,
+.bilangan .values {
+   width: 100%;
+   height: 30px;
+   box-sizing: border-box;
+   display: grid;
+   grid-template-columns: 50px 350px;
+   overflow: hidden;
+   border-bottom: 2px solid var(--bgTwo);
+}
+
+.kurs-value .values input[type="text"],
+.suhu .values input[type="text"],
+.bilangan .values input[type="text"] {
+   box-sizing: border-box;
+   border: none;
+   padding: 0 10px;
+   background-color: var(--bgOne);
+   color: var(--textColor);
+   font-size: 1.4em;
+   cursor: default;
+}
+
+.kurs-value .values input[focus="focus"],
+.suhu .values input[focus="focus"],
+.bilangan .values input[focus="focus"] {
+   color: #df5726;
+}
+
+.kurs-value .values input:focus,
+.suhu .values input:focus,
+.bilangan .values input:focus {
+   outline: none;
+}
+
+.code {
+   text-align: center;
+   line-height: 30px;
+   box-sizing: border-box;
+   border: none;
+   background-color: var(--bgOne);
+   font-size: 1.1em;
+   cursor: default;
+}
+
+.info-data {
+   font-size: 14px;
+   width: 100%;
+   height: 100%;
+   text-align: center;
+}
+
+.info-data span {
+   display: block;
+   font-size: 12px;
+}
+
+
+/* Button Suhu */
+.button-suhu {
+   display: grid;
+   grid-template-rows: repeat(4, 70px);
+   grid-template-columns: repeat(4, 70px);
+   justify-content: center;
+   gap: 20px;
+   background-color: var(--bgTwo);
+   height: 100%;
+   align-content: center;
+}
+
+.button-suhu span {
+   width: 100%;
+   height: 100%;
+   display: grid;
+   place-items: center;
+   border-radius: 35px;
+   background-color: var(--bgThree);
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   font-weight: 600;
+   font-size: 1.5em;
+   cursor: pointer;
+}
+
+.button-suhu span:active {
+   background-color: var(--buttonClick);
+}
+
+.button-suhu span[value="c"] {
+   grid-area: 2 / 4 / 4 / 4;
+   color: rgb(223, 87, 38);
+   font-size: 2em;
+}
+
+.button-suhu span[value="del"] {
+   grid-area: 4 / 4 / 5 / 5;
+}
+
+.button-suhu span[value="0"] {
+   grid-area: 4 / 1 / 5 / 3;
+}
+
+.button-suhu span[value="pm"] {
+   grid-area: 1 / 4 / 2 / 4;
+}
+
+
+/* Button Bilangan */
+.button-bilangan {
+   display: grid;
+   grid-template-rows: repeat(4, 70px);
+   grid-template-columns: repeat(4, 70px);
+   justify-content: center;
+   gap: 20px;
+   background-color: var(--bgTwo);
+   height: 100%;
+   align-content: center;
+}
+
+.button-bilangan span {
+   width: 100%;
+   height: 100%;
+   display: grid;
+   place-items: center;
+   border-radius: 35px;
+   background-color: var(--bgThree);
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   font-weight: 600;
+   font-size: 1.5em;
+   cursor: pointer;
+}
+
+.button-bilangan span:active {
+   background-color: var(--buttonClick);
+}
+
+.button-bilangan span[value="c"] {
+   grid-area: 1 / 4 / 3 / 4;
+   color: rgb(223, 87, 38);
+   font-size: 2em;
+}
+
+.button-bilangan span[value="del"] {
+   grid-area: 3 / 4 / 5 / 5;
+}
+
+.button-bilangan span[value="0"] {
+   grid-area: 4 / 1 / 5 / 3;
+}
+
+
+/* Button Number */
+.button-currency {
+   display: grid;
+   grid-template-rows: repeat(4, 70px);
+   grid-template-columns: repeat(4, 70px);
+   justify-content: center;
+   gap: 20px;
+   background-color: var(--bgTwo);
+   height: 100%;
+   align-content: center;
+}
+
+.button-currency span {
+   width: 100%;
+   height: 100%;
+   display: grid;
+   place-items: center;
+   border-radius: 35px;
+   background-color: var(--bgThree);
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   font-weight: 600;
+   font-size: 1.5em;
+   cursor: pointer;
+}
+
+.button-currency span:active {
+   background-color: var(--buttonClick);
+}
+
+.button-currency span[value="c"] {
+   grid-area: 1 / 4 / 3 / 4;
+   color: rgb(223, 87, 38);
+   font-size: 2em;
+}
+
+.button-currency span[value="del"] {
+   grid-area: 3 / 4 / 5 / 5;
+}
+
+.button-currency span[value="0"] {
+   grid-area: 4 / 1 / 5 / 3;
+}
+
+
+/* Hexadecimal Number */
+.hex-button {
+   position: absolute;
+   width: 100%;
+   height: 420px;
+   background-color: var(--bgTwo);
+   bottom: 0;
+   display: grid;
+   grid-template-rows: repeat(5, 60px);
+   grid-template-columns: repeat(4, 60px);
+   justify-content: center;
+   gap: 20px;
+   background-color: var(--bgTwo);
+   align-content: center;
+   left: 100%;
+}
+
+.hex-button.open {
+   left: 0;
+}
+
+.hex-button span {
+   width: 100%;
+   height: 100%;
+   display: grid;
+   place-items: center;
+   border-radius: 35px;
+   background-color: var(--bgThree);
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   font-weight: 600;
+   font-size: 1.5em;
+   cursor: pointer;
+}
+
+.hex-button span:active {
+   background-color: var(--buttonClick);
+}
+
+.hex-button span[value="cl"] {
+   grid-area: 1 / 4 / 3 / 4;
+   color: rgb(223, 87, 38);
+   font-size: 2em;
+}
+
+.hex-button span[value="del"] {
+   grid-area: 3 / 4 / 5 / 4;
+}
+
+
+/* Binary Button */
+.bin-button {
+   position: absolute;
+   width: 100%;
+   height: 360px;
+   background-color: var(--bgTwo);
+   bottom: 0;
+   display: grid;
+   grid-template-rows: repeat(4, 60px);
+   grid-template-columns: repeat(3, 60px);
+   justify-content: center;
+   gap: 20px;
+   background-color: var(--bgTwo);
+   align-content: center;
+   left: 100%;
+}
+
+.bin-button.open {
+   left: 0;
+}
+
+.bin-button span {
+   width: 100%;
+   height: 100%;
+   display: grid;
+   place-items: center;
+   border-radius: 35px;
+   background-color: var(--bgThree);
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   font-weight: 600;
+   font-size: 1.5em;
+   cursor: pointer;
+}
+
+.bin-button span[value="0"] {
+   grid-area: 1 / 1 / 3 / 3;
+   border-radius: 50%;
+   font-size: 3em;
+}
+
+.bin-button span[value="1"] {
+   grid-area: 3 / 1 / 5 / 3;
+   border-radius: 50%;
+   font-size: 3em;
+}
+
+.bin-button span[value="cl"] {
+   grid-area: 1 / 3 / 3 / 4;
+   color: rgb(223, 87, 38);
+   font-size: 2em;
+}
+
+.bin-button span[value="del"] {
+   grid-area: 3 / 3 / 5 / 4;
+}
+
+
+/* Octal Button */
+.oct-button {
+   position: absolute;
+   width: 100%;
+   height: 360px;
+   background-color: var(--bgTwo);
+   bottom: 0;
+   display: grid;
+   grid-template-rows: repeat(4, 70px);
+   grid-template-columns: repeat(3, 70px);
+   justify-content: center;
+   gap: 20px;
+   background-color: var(--bgTwo);
+   align-content: center;
+   left: 100%;
+}
+
+.oct-button.open {
+   left: 0;
+}
+
+.oct-button span {
+   width: 100%;
+   height: 100%;
+   display: grid;
+   place-items: center;
+   border-radius: 35px;
+   background-color: var(--bgThree);
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   font-weight: 600;
+   font-size: 1.5em;
+   cursor: pointer;
+}
+
+.oct-button span[value="0"] {
+   grid-area: 3 / 2 / 3 / 4;
+}
+
+.oct-button span[value="cl"] {
+   grid-area: 4 / 2 / 5 / 4;
+   font-size: 2em;
+   color: rgb(223, 87, 38);
+}
+
+
+
+/* Selectator */
+.selectator_element {
+   min-height: auto !important;
+}
+
+.selectator_option_title {
+   font-size: 16px !important;
+   line-height: 30px !important;
+   color: var(--textColor);
+}
+
+.selectator_option_right {
+   background-color: rgb(223, 87, 38) !important;
+}
+
+.selectator_options {
+   overflow: auto !important;
+   background-color: var(--bgOne) !important;
+}
+
+.selectator_selected_item_title {
+   font-size: 16px !important;
+   margin-left: 40px !important;
+   font-weight: 700;
+}
+
+.selectator_selected_item_right {
+   background-color: rgb(223, 87, 38) !important;
+}
+
+.selectator_input {
+   background-color: var(--bgOne) !important;
+   color: var(--textColor) !important;
+}
+
+.active {
+   background-color: var(--bgThree) !important;
+   color: var(--textColor) !important;
+}
+
+.selectator_selected_item {
+   color: var(--textColor) !important;
+}
+
+#selectator_currency-1,
+#selectator_currency-2,
+#selectator_temperature-1,
+#selectator_temperature-2,
+#selectator_number-1,
+#selectator_number-2 {
+   border: none;
+   width: 100% !important;
+   background-color: var(--bgOne);
+   cursor: pointer;
+   color: var(--textColor) !important;
+}
+
+
+.selectator_selected_item_left {
+   margin: 0 5px;
+}
+
+.selectator_element::after {
+   color: var(--textColor) !important;
+   font-size: 18px !important;
+}
+
+
+/* Responsive */
+@media (max-width: 500px) {
+   .container {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      border: none;
+   }
+
+   .form-1,
+   .form-2 {
+      width: 100% !important;
+   }
+}
+
+@media (min-width: 768px) {
+   .container {
+      width: 500px;
+   }
+}
+
+@media (min-width: 992px) {
+
+   span[value="c"],
+   span[value="cl"],
+   span[value="del"],
+   span[value="pm"] {
+      position: relative;
+   }
+
+   span[value="c"]::after,
+   span[value="cl"]::after,
+   span[value="del"]::after,
+   span[value="pm"]::after {
+      position: absolute;
+      color: var(--textColor);
+      font-size: 10px;
+      bottom: 0;
+      font-weight: 200;
+      opacity: .6;
+   }
+
+   span[value="c"]::after,
+   span[value="cl"]::after {
+      content: 'Ctrl';
+   }
+
+   span[value="del"]::after {
+      content: 'Backspace';
+   }
+
+   span[value="pm"]::after {
+      content: 'Shift';
+   }
+}
